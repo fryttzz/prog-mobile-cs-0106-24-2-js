@@ -1,6 +1,7 @@
 import { Text, type TextProps, StyleSheet } from 'react-native';
 
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { Colors } from '@/constants/Colors';
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -44,13 +45,15 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   title: {
-    fontSize: 32,
+    fontSize: 26,
     fontWeight: 'bold',
-    lineHeight: 32,
+    lineHeight: 26,
+    color: Colors.light.primary
   },
   subtitle: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: Colors.light.primary
   },
   link: {
     lineHeight: 30,
