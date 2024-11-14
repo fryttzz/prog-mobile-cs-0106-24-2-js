@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
   suffix: {
     fontSize: 14,
     letterSpacing: 0.1,
-    color: Colors.dark.textSuffix,
+    color: Colors.dark.HighlightFix,
   },
   inputIcon: {
     justifyContent: "flex-end",
