@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-import Expand from "@/assets/expandir.svg";
+import Expand from "../../assets/expandir.svg";
 import { Colors } from "@/constants/Colors";
 
 type Props = TouchableOpacityProps & {

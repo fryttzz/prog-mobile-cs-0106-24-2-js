@@ -1,12 +1,28 @@
 import { Colors } from "@/constants/Colors";
 import { StyleSheet, View } from "react-native";
 
-import Trashcan from "../assets/trashcan.svg";
+import Trashcan from "../../assets/trashcan.svg";
 
 import DefaultInput from "./DefaultInput";
 import ActionButton from "./ActionButton";
 
 export function FormProduct() {
+  // async function handleSave() {
+  //   if (id) {
+  //     update();
+  //   } else {
+  //     create();
+  //   }
+
+  //   setId("")
+  //   setCodigo("")
+  //   setDescricao("")
+  //   setQuantidade("")
+  //   setValorCusto("")
+  //   setValorVenda("")
+  //   await list()
+  // }
+
   return (
     <View style={styles.container}>
       <DefaultInput label="Código:" accessibilityLabel="Código" />
