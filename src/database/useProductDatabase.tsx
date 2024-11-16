@@ -5,8 +5,8 @@ export type ProductDatabase = {
   codigo: string;
   descricao: string;
   quantidade: number;
-  valorCusto: number;
-  valorVenda: number;
+  valorCusto: string;
+  valorVenda: string;
 };
 
 export function useProductDatabase() {
@@ -14,7 +14,7 @@ export function useProductDatabase() {
 
   async function create(data: Omit<ProductDatabase, "id">) {
     const statement = await database.prepareAsync(
-      "INSET INTO produtos (codigo, descricao, quantidade, valorCusto, valorVenda) VALUES ($codigo, $descricao, $quantidade, $valorCusto, $valorVenda)"
+      "INSERT INTO produtos (codigo, descricao, quatidade, valorCusto, valorVenda) VALUES ($codigo, $descricao, $quantidade, $valorCusto, $valorVenda)"
     );
 
     try {
@@ -51,6 +51,18 @@ export function useProductDatabase() {
     }
   }
 
+  async function list() {
+    try {
+      const query = "SELECT * FROM produtos";
+
+      const response = await database.getAllAsync<ProductDatabase>(query);
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function update(data: ProductDatabase) {
     const statement = await database.prepareAsync(
       "UPDATE produtos SET codigo = $codigo, descricao = $descricao, quantidade = $quantidade, valorCusto = $valorCusto, valorVenda = $valorVenda WHERE id = $id"
@@ -72,5 +84,5 @@ export function useProductDatabase() {
     }
   }
 
-  return { create, searchByCod, update };
+  return { create, searchByCod, update, list };
 }

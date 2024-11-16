@@ -7,8 +7,8 @@ export async function initializeDatabase(database: SQLiteDatabase) {
                 codigo TEXT NOT NULL,
                 descricao TEXT NOT NULL,
                 quatidade REAL NOT NULL,
-                valorCusto REAL NOT NULL,
-                valorVenda REAL NOT NULL
+                valorCusto TEXT NOT NULL,
+                valorVenda TEXT NOT NULL
             );
         `)
 }

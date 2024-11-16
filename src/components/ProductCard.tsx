@@ -2,8 +2,9 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 import { Colors } from "@/constants/Colors";
+import { ProductDatabase } from "@/database/useProductDatabase";
 
-export default function CountCard() {
+export default function CountCard(product: ProductDatabase) {
   return (
     <View style={styles.container}>
       <View style={styles.row1}>
@@ -13,8 +14,8 @@ export default function CountCard() {
             <Text style={styles.prefix}>Quant:</Text>
           </View>
           <View>
-            <Text style={styles.numbers}>#4658</Text>
-            <Text style={styles.numbers}>1000</Text>
+            <Text style={styles.numbers}>{product.codigo}</Text>
+            <Text style={styles.numbers}>{product.quantidade}</Text>
           </View>
         </View>
         <View style={styles.column2}>
@@ -23,8 +24,8 @@ export default function CountCard() {
             <Text style={styles.prefix}>Venda R$:</Text>
           </View>
           <View>
-            <Text style={styles.numbers}>R$ 10,00</Text>
-            <Text style={styles.numbers}>R$ 10,00</Text>
+            <Text style={styles.numbers}>{product.valorCusto}</Text>
+            <Text style={styles.numbers}>{product.valorVenda}</Text>
           </View>
         </View>
       </View>
@@ -33,7 +34,7 @@ export default function CountCard() {
           <Text style={styles.prefix}>Descrição:</Text>
         </View>
         <View>
-          <Text style={styles.numbers}>Placa de video</Text>
+          <Text style={styles.numbers}>{product.descricao}</Text>
         </View>
       </View>
     </View>
