@@ -33,13 +33,16 @@ export default function RootLayout() {
   }
 
   return (
-    <SQLiteProvider databaseName="controleEstoque.db" onInit={initializeDatabase}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <SQLiteProvider
+        databaseName="controleEstoque.db"
+        onInit={initializeDatabase}
+      >
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-      </ThemeProvider>
-    </SQLiteProvider>
+      </SQLiteProvider>
+    </ThemeProvider>
   );
 }
