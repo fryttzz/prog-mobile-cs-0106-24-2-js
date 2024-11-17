@@ -34,22 +34,19 @@ export default function ListProduct() {
         title="Lista de Produtos"
         onPress={() => alert("Lista de Produtos")}
         expand={false}
+        style={styles.listHeader}
       />
-      <FlatList
-        data={products}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={(list) => (
-          <ProductCard
-            id={list.item.id}
-            codigo={list.item.codigo}
-            descricao={list.item.descricao}
-            quantidade={list.item.quantidade}
-            valorCusto={list.item.valorCusto}
-            valorVenda={list.item.valorVenda}
-          />
-        )}
-        style={styles.list}
-      />
+      {products.map((item) => (
+        <ProductCard
+          key={item.id}
+          id={item.id}
+          codigo={item.codigo}
+          descricao={item.descricao}
+          quantidade={item.quantidade}
+          valorCusto={item.valorCusto}
+          valorVenda={item.valorVenda}
+        />
+      ))}
     </SafeAreaView>
   );
 }
@@ -59,4 +56,5 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   list: {},
+  listHeader: {},
 });

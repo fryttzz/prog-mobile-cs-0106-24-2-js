@@ -1,12 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 import { Colors } from "@/constants/Colors";
 import { ProductDatabase } from "@/database/useProductDatabase";
 
 export default function CountCard(product: ProductDatabase) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.5}>
       <View style={styles.row1}>
         <View style={styles.column1}>
           <View>
@@ -37,7 +37,7 @@ export default function CountCard(product: ProductDatabase) {
           <Text style={styles.numbers}>{product.descricao}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
