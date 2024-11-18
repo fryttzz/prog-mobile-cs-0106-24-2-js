@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Colors } from "@/constants/Colors";
 import { Alert, StyleSheet, View } from "react-native";
 
@@ -7,6 +7,7 @@ import Trashcan from "../../assets/trashcan.svg";
 import DefaultInput from "./DefaultInput";
 import ActionButton from "./ActionButton";
 import { useProductDatabase } from "@/database/useProductDatabase";
+import { useLocalSearchParams } from "expo-router";
 
 export function FormProduct() {
   const [id, setId] = useState("");
@@ -15,6 +16,8 @@ export function FormProduct() {
   const [quantidade, setQuantidade] = useState("");
   const [valorCusto, setValorCusto] = useState("");
   const [valorVenda, setValorVenda] = useState("");
+
+  const { productId } = useLocalSearchParams();
 
   const productDatabase = useProductDatabase();
 
@@ -77,6 +80,23 @@ export function FormProduct() {
     // handleClear();
   }
 
+  async function handleProduct(productId: string) {
+    try {
+      const response = await productDatabase.getProductById(productId);
+      if (response != null) {
+
+        setId(String(response.id));
+        setCodigo(response.codigo);
+        setDescricao(response.descricao);
+        setQuantidade(String(response.quantidade));
+        setValorCusto(response.valorCusto);
+        setValorVenda(response.valorVenda);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function handleClear() {
     setId("");
     setCodigo("");
@@ -85,6 +105,12 @@ export function FormProduct() {
     setValorCusto("");
     setValorVenda("");
   }
+
+  useEffect(() => {
+    if (productId) {
+      handleProduct(productId);
+    }
+  }, [productId]);
 
   return (
     <View style={styles.container}>

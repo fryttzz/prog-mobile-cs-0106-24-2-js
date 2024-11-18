@@ -9,6 +9,7 @@ import {
   ProductDatabase,
   useProductDatabase,
 } from "@/database/useProductDatabase";
+import { router } from "expo-router";
 
 export default function ListProduct() {
   const [products, setProducts] = useState<ProductDatabase[]>([]);
@@ -24,8 +25,8 @@ export default function ListProduct() {
     }
   }
 
-  async function handleDetails(itemId: number) {
-    console.log(itemId);
+  async function handleDetails(productId: string) {
+    router.navigate(`/(tabs)[index]?productId=${productId}`);
   }
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function ListProduct() {
           quantidade={item.quantidade}
           valorCusto={item.valorCusto}
           valorVenda={item.valorVenda}
-          onPress={() => handleDetails(item.id)}
+          onPress={() => handleDetails(item.codigo)}
         />
       ))}
     </SafeAreaView>

@@ -51,6 +51,23 @@ export function useProductDatabase() {
     }
   }
 
+  async function getProductById(id: string) {
+    try {
+      
+      const query = `SELECT * FROM produtos WHERE codigo = ${id}`;
+      
+      const response = await database.getFirstAsync<ProductDatabase>(
+        query,
+        `%${id}%`
+      );
+      console.log(response);
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async function list() {
     try {
       const query = "SELECT * FROM produtos";
@@ -84,5 +101,5 @@ export function useProductDatabase() {
     }
   }
 
-  return { create, searchByCod, update, list };
+  return { create, searchByCod, getProductById, update, list };
 }
