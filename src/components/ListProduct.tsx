@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactEventHandler, useEffect, useState } from "react";
 
-import { StyleSheet } from "react-native";
-import { SafeAreaView, FlatList } from "react-native";
+import { GestureResponderEvent, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native";
 
 import ListButton from "@/components/ListButton";
 import ProductCard from "@/components/ProductCard";
@@ -24,6 +24,10 @@ export default function ListProduct() {
     }
   }
 
+  async function handleDetails(itemId: number) {
+    console.log(itemId);
+  }
+
   useEffect(() => {
     list();
   });
@@ -39,12 +43,13 @@ export default function ListProduct() {
       {products.map((item) => (
         <ProductCard
           key={item.id}
-          id={item.id}
+          itemId={item.id}
           codigo={item.codigo}
           descricao={item.descricao}
           quantidade={item.quantidade}
           valorCusto={item.valorCusto}
           valorVenda={item.valorVenda}
+          onPress={() => handleDetails(item.id)}
         />
       ))}
     </SafeAreaView>

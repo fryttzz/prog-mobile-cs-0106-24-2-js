@@ -1,12 +1,34 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
 
 import { Colors } from "@/constants/Colors";
 import { ProductDatabase } from "@/database/useProductDatabase";
 
-export default function CountCard(product: ProductDatabase) {
+type Props = TouchableOpacityProps & {
+  itemId: number;
+  codigo: string;
+  descricao: string;
+  quantidade: number;
+  valorCusto: string;
+  valorVenda: string;
+};
+
+export default function CountCard({
+  codigo,
+  quantidade,
+  valorCusto,
+  valorVenda,
+  descricao,
+  ...rest
+}: Props) {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.5}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.5} {...rest}>
       <View style={styles.row1}>
         <View style={styles.column1}>
           <View>
@@ -14,8 +36,8 @@ export default function CountCard(product: ProductDatabase) {
             <Text style={styles.prefix}>Quant:</Text>
           </View>
           <View>
-            <Text style={styles.numbers}>{product.codigo}</Text>
-            <Text style={styles.numbers}>{product.quantidade}</Text>
+            <Text style={styles.numbers}>{codigo}</Text>
+            <Text style={styles.numbers}>{quantidade}</Text>
           </View>
         </View>
         <View style={styles.column2}>
@@ -24,8 +46,8 @@ export default function CountCard(product: ProductDatabase) {
             <Text style={styles.prefix}>Venda R$:</Text>
           </View>
           <View>
-            <Text style={styles.numbers}>{product.valorCusto}</Text>
-            <Text style={styles.numbers}>{product.valorVenda}</Text>
+            <Text style={styles.numbers}>{valorCusto}</Text>
+            <Text style={styles.numbers}>{valorVenda}</Text>
           </View>
         </View>
       </View>
@@ -34,7 +56,7 @@ export default function CountCard(product: ProductDatabase) {
           <Text style={styles.prefix}>Descrição:</Text>
         </View>
         <View>
-          <Text style={styles.numbers}>{product.descricao}</Text>
+          <Text style={styles.numbers}>{descricao}</Text>
         </View>
       </View>
     </TouchableOpacity>
