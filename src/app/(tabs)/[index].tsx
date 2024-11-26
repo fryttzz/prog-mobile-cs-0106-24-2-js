@@ -5,8 +5,6 @@ import { ThemedView } from "@/components/ThemedView";
 import { FormProduct } from "@/components/FormProduct";
 import { ScrollView } from "react-native";
 import { Colors } from "@/constants/Colors";
-import { useLocalSearchParams } from "expo-router";
-import { useEffect } from "react";
 
 export default function HomeScreen() {
   

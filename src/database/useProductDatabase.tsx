@@ -14,7 +14,7 @@ export function useProductDatabase() {
 
   async function create(data: Omit<ProductDatabase, "id">) {
     const statement = await database.prepareAsync(
-      "INSERT INTO produtos (codigo, descricao, quatidade, valorCusto, valorVenda) VALUES ($codigo, $descricao, $quantidade, $valorCusto, $valorVenda)"
+      "INSERT INTO produtos (codigo, descricao, quantidade, valorCusto, valorVenda) VALUES ($codigo, $descricao, $quantidade, $valorCusto, $valorVenda)"
     );
 
     try {

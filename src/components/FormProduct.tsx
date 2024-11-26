@@ -69,7 +69,7 @@ export function FormProduct() {
       create();
     }
 
-    // handleClear();
+    handleClear();
     // await list()
   }
 
@@ -80,9 +80,9 @@ export function FormProduct() {
     // handleClear();
   }
 
-  async function handleProduct(productId: string) {
+  async function handleProduct(productId: string | string[]) {
     try {
-      const response = await productDatabase.getProductById(productId);
+      const response = await productDatabase.getProductById(String(productId));
       if (response != null) {
 
         setId(String(response.id));
