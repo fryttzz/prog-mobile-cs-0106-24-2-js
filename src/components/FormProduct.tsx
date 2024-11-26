@@ -66,25 +66,37 @@ export function FormProduct() {
     if (id) {
       update();
     } else {
-      create();
+      if (
+        codigo == "" ||
+        descricao == "" ||
+        quantidade == "" ||
+        valorCusto == "" ||
+        valorVenda == ""
+      ) {
+        Alert.alert("Preencha todas o campos!");
+      } else {
+        create();
+        handleClear();
+      }
     }
-
-    handleClear();
-    // await list()
   }
 
   async function handleDelete() {
-    // if (id) {
-    //   productContext.delete(id);
-    // }
-    // handleClear();
+    try {
+      if (id) {
+        await productDatabase.deleteProduct(id);
+      }
+      Alert.alert("O produto foi apagado!");
+    } catch (error) {
+      console.error(error);
+    }
+    handleClear();
   }
 
   async function handleProduct(productId: string | string[]) {
     try {
       const response = await productDatabase.getProductById(String(productId));
       if (response != null) {
-
         setId(String(response.id));
         setCodigo(response.codigo);
         setDescricao(response.descricao);
@@ -108,6 +120,8 @@ export function FormProduct() {
 
   useEffect(() => {
     if (productId) {
+      console.log(productId);
+
       handleProduct(productId);
     }
   }, [productId]);

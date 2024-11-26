@@ -70,7 +70,7 @@ export function useProductDatabase() {
 
   async function list() {
     try {
-      const query = "SELECT * FROM produtos";
+      const query = "SELECT * FROM produtos ORDER BY id DESC";
 
       const response = await database.getAllAsync<ProductDatabase>(query);
 
@@ -101,5 +101,19 @@ export function useProductDatabase() {
     }
   }
 
-  return { create, searchByCod, getProductById, update, list };
+  async function deleteProduct(id: string) {
+
+    const statement = await database.prepareAsync(
+      "DELETE FROM produtos WHERE id = $id"
+    );
+    try {
+      const result = await statement.executeAsync({
+        $id: id
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  return { create, searchByCod, getProductById, update, list, deleteProduct };
 }
