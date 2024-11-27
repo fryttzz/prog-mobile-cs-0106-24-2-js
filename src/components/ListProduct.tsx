@@ -32,7 +32,7 @@ export default function ListProduct() {
 
   async function handleDetails(productId: string) {
     setProductDetails(productId)
-    router.navigate(`/(tabs)[index]?productId=${productId}`);
+    router.navigate(`/`);
   }
 
   useEffect(() => {

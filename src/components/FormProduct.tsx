@@ -24,8 +24,6 @@ export function FormProduct() {
   const productDetails = useContext(ProductContext);
   const setProductDetails = useContext(ProductDispatchContext);
 
-  const { productId } = useLocalSearchParams();
-
   const productDatabase = useProductDatabase();
 
   async function create() {
