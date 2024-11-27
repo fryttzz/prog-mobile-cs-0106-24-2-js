@@ -12,6 +12,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SQLiteProvider } from "expo-sqlite";
 import { initializeDatabase } from "@/database/initializeDatabase";
+import { ProductProvider } from "@/context/ProductContext";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -34,15 +35,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <SQLiteProvider
-        databaseName="controleEstoque.db"
-        onInit={initializeDatabase}
-      >
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </SQLiteProvider>
+      <ProductProvider>
+        <SQLiteProvider databaseName="stock.db" onInit={initializeDatabase}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </SQLiteProvider>
+      </ProductProvider>
     </ThemeProvider>
   );
 }

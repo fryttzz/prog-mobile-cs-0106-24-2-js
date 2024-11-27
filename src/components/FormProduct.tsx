@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Colors } from "@/constants/Colors";
 import { Alert, StyleSheet, View } from "react-native";
 
@@ -8,6 +8,10 @@ import DefaultInput from "./DefaultInput";
 import ActionButton from "./ActionButton";
 import { useProductDatabase } from "@/database/useProductDatabase";
 import { useLocalSearchParams } from "expo-router";
+import {
+  ProductContext,
+  ProductDispatchContext,
+} from "@/context/ProductContext";
 
 export function FormProduct() {
   const [id, setId] = useState("");
@@ -16,6 +20,9 @@ export function FormProduct() {
   const [quantidade, setQuantidade] = useState("");
   const [valorCusto, setValorCusto] = useState("");
   const [valorVenda, setValorVenda] = useState("");
+
+  const productDetails = useContext(ProductContext);
+  const setProductDetails = useContext(ProductDispatchContext);
 
   const { productId } = useLocalSearchParams();
 
@@ -116,15 +123,15 @@ export function FormProduct() {
     setQuantidade("");
     setValorCusto("");
     setValorVenda("");
+    setProductDetails("");
   }
 
   useEffect(() => {
-    if (productId) {
-      console.log(productId);
-
-      handleProduct(productId);
+    // console.log("id do context: " + productDatabase.productId)
+    if (productDetails != "") {
+      handleProduct(productDetails);
     }
-  }, [productId]);
+  }, [productDetails]);
 
   return (
     <View style={styles.container}>

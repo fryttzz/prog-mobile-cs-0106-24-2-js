@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { SafeAreaView, StyleSheet, Text } from "react-native";
+import {
+  ProductContext,
+  ProductDispatchContext,
+} from "@/context/ProductContext";
 import ListButton from "@/components/ListButton";
 import ProductCard from "@/components/ProductCard";
 import {
@@ -12,6 +16,8 @@ import { Colors } from "@/constants/Colors";
 
 export default function ListProduct() {
   const [products, setProducts] = useState<ProductDatabase[]>([]);
+  const productDetails = useContext(ProductContext);
+  const setProductDetails = useContext(ProductDispatchContext);
 
   const productDatabase = useProductDatabase();
 
@@ -25,6 +31,7 @@ export default function ListProduct() {
   }
 
   async function handleDetails(productId: string) {
+    setProductDetails(productId)
     router.navigate(`/(tabs)[index]?productId=${productId}`);
   }
 
