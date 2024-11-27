@@ -83,10 +83,10 @@ export function FormProduct() {
 
   async function handleDelete() {
     try {
-      if (id) {
+      if (id != "") {
         await productDatabase.deleteProduct(id);
+        Alert.alert("O produto foi apagado!");
       }
-      Alert.alert("O produto foi apagado!");
     } catch (error) {
       console.error(error);
     }

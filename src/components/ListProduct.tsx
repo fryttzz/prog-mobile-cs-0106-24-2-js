@@ -1,8 +1,6 @@
-import React, { ReactEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { GestureResponderEvent, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native";
-
+import { SafeAreaView, StyleSheet, Text } from "react-native";
 import ListButton from "@/components/ListButton";
 import ProductCard from "@/components/ProductCard";
 import {
@@ -10,6 +8,7 @@ import {
   useProductDatabase,
 } from "@/database/useProductDatabase";
 import { router } from "expo-router";
+import { Colors } from "@/constants/Colors";
 
 export default function ListProduct() {
   const [products, setProducts] = useState<ProductDatabase[]>([]);
@@ -41,18 +40,22 @@ export default function ListProduct() {
         expand={false}
         style={styles.listHeader}
       />
-      {products.map((item) => (
-        <ProductCard
-          key={item.id}
-          itemId={item.id}
-          codigo={item.codigo}
-          descricao={item.descricao}
-          quantidade={item.quantidade}
-          valorCusto={item.valorCusto}
-          valorVenda={item.valorVenda}
-          onPress={() => handleDetails(item.codigo)}
-        />
-      ))}
+      {products.length > 0 ? (
+        products.map((item) => (
+          <ProductCard
+            key={item.id}
+            itemId={item.id}
+            codigo={item.codigo}
+            descricao={item.descricao}
+            quantidade={item.quantidade}
+            valorCusto={item.valorCusto}
+            valorVenda={item.valorVenda}
+            onPress={() => handleDetails(item.codigo)}
+          />
+        ))
+      ) : (
+        <Text style={styles.emptyList}>Sem produtos cadastrados!</Text>
+      )}
     </SafeAreaView>
   );
 }
@@ -63,4 +66,5 @@ export const styles = StyleSheet.create({
   },
   list: {},
   listHeader: {},
+  emptyList: { color: Colors.dark.HighlightFix, alignSelf: "center" },
 });

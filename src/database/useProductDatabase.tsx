@@ -1,4 +1,5 @@
 import { useSQLiteContext } from "expo-sqlite";
+import { useState } from "react";
 
 export type ProductDatabase = {
   id: number;
@@ -53,9 +54,8 @@ export function useProductDatabase() {
 
   async function getProductById(id: string) {
     try {
-      
       const query = `SELECT * FROM produtos WHERE codigo = ${id}`;
-      
+
       const response = await database.getFirstAsync<ProductDatabase>(
         query,
         `%${id}%`
@@ -102,18 +102,24 @@ export function useProductDatabase() {
   }
 
   async function deleteProduct(id: string) {
-
     const statement = await database.prepareAsync(
       "DELETE FROM produtos WHERE id = $id"
     );
     try {
       const result = await statement.executeAsync({
-        $id: id
+        $id: id,
       });
     } catch (error) {
       throw error;
     }
   }
 
-  return { create, searchByCod, getProductById, update, list, deleteProduct };
+  return {
+    create,
+    searchByCod,
+    getProductById,
+    update,
+    list,
+    deleteProduct,
+  };
 }
